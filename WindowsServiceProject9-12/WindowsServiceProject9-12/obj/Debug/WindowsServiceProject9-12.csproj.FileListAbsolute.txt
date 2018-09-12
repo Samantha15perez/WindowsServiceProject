@@ -1,0 +1,8 @@
+C:\Users\Cyberadmin\Desktop\WindowsServiceProject9-12\WindowsServiceProject9-12\bin\Debug\WindowsServiceProject9-12.exe.config
+C:\Users\Cyberadmin\Desktop\WindowsServiceProject9-12\WindowsServiceProject9-12\bin\Debug\WindowsServiceProject9-12.exe
+C:\Users\Cyberadmin\Desktop\WindowsServiceProject9-12\WindowsServiceProject9-12\bin\Debug\WindowsServiceProject9-12.pdb
+C:\Users\Cyberadmin\Desktop\WindowsServiceProject9-12\WindowsServiceProject9-12\obj\Debug\WindowsServiceProject9-12.csprojResolveAssemblyReference.cache
+C:\Users\Cyberadmin\Desktop\WindowsServiceProject9-12\WindowsServiceProject9-12\obj\Debug\WindowsServiceProject9_12.Service1.resources
+C:\Users\Cyberadmin\Desktop\WindowsServiceProject9-12\WindowsServiceProject9-12\obj\Debug\WindowsServiceProject9-12.csproj.GenerateResource.Cache
+C:\Users\Cyberadmin\Desktop\WindowsServiceProject9-12\WindowsServiceProject9-12\obj\Debug\WindowsServiceProject9-12.exe
+C:\Users\Cyberadmin\Desktop\WindowsServiceProject9-12\WindowsServiceProject9-12\obj\Debug\WindowsServiceProject9-12.pdb
