@@ -34,7 +34,8 @@
             // servTimer
             // 
             this.servTimer.Enabled = true;
-            this.servTimer.Interval = 300000D;
+            this.servTimer.Interval = 500D;
+            this.servTimer.Elapsed += new System.Timers.ElapsedEventHandler(this.servTimer_Elapsed);
             // 
             // Service1
             // 

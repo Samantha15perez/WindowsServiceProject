@@ -36,7 +36,23 @@ namespace WindowsServiceProject9_12
         {
             //do thing before stop
             //notifies that the program has ended
+           
+            
+
             var msg = new MailMessage("samstestapplication@gmail.com", "3525025340@vtext.com", "", "test onstop");
+            msg.IsBodyHtml = true;
+            var smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            smtpClient.UseDefaultCredentials = true;
+            smtpClient.Credentials = new NetworkCredential("samstestapplication@gmail.com", "Fullmetal_69");
+            smtpClient.EnableSsl = true;
+            smtpClient.Send(msg);
+
+            
+        }
+
+        private void servTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            var msg = new MailMessage("samstestapplication@gmail.com", "3525025340@vtext.com", "", "timer test");
             msg.IsBodyHtml = true;
             var smtpClient = new SmtpClient("smtp.gmail.com", 587);
             smtpClient.UseDefaultCredentials = true;
@@ -45,11 +61,15 @@ namespace WindowsServiceProject9_12
             smtpClient.Send(msg);
         }
 
+
+
         internal void TestStartandStop(string[] args)
         {
             // If started from Visual studio, run through the events.
             this.OnStart(args);
 
+            this.servTimer.Start();
+            this.servTimer.Stop();
 
             this.OnStop();
         }

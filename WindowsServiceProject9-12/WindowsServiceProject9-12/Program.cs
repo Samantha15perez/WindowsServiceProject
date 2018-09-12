@@ -21,6 +21,7 @@ namespace WindowsServiceProject9_12
             {
                 Service1 S1 = new Service1();
                 S1.TestStartandStop(args);
+                
                
 
                 
