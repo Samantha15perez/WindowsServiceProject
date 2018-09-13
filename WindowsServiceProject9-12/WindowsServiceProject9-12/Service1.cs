@@ -8,18 +8,28 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Collections;
+
 
 namespace WindowsServiceProject9_12
 {
     public partial class Service1 : ServiceBase
     {
+        
+
         public Service1()
         {
             InitializeComponent();
         }
 
         public string path = @"C:\Users\Cyberadmin\Desktop"; //put path here
+
+        //Queue qt = new Queue();
         
+        
+        
+
+
 
 
         private void watch(string path)
@@ -37,7 +47,7 @@ namespace WindowsServiceProject9_12
 
             fileSystemWatcher.EnableRaisingEvents = true;
 
-            fileSystemWatcher.Filter = "*.mp3; *.wav; *.png; *.jpg; *.mp4; *.avi; *.txt";
+            fileSystemWatcher.Filter = "*.jpg";
 
             //NOTE: add txt files in here too to make testing a lot easier
 
@@ -48,8 +58,9 @@ namespace WindowsServiceProject9_12
 
         {
             StreamWriter OUTPUT = new StreamWriter(@"C:\Users\Cyberadmin\Desktop\\CHANGELOG.txt", true);
-            OUTPUT.WriteLine("File created: {0}", e.Name);
+            OUTPUT.WriteLine("File created: {0}", e.Name + " " + DateTime.Now.ToString());
             OUTPUT.Close();
+
 
         }
 
@@ -58,8 +69,9 @@ namespace WindowsServiceProject9_12
         {
 
             StreamWriter OUTPUT = new StreamWriter(@"C:\Users\Cyberadmin\Desktop\\CHANGELOG.txt", true);
-            OUTPUT.WriteLine("File renamed: {0}", e.Name);
+            OUTPUT.WriteLine("File renamed: {0}", e.Name + " " + DateTime.Now.ToString());
             OUTPUT.Close();
+            
 
         }
 
@@ -68,13 +80,10 @@ namespace WindowsServiceProject9_12
         {
 
             StreamWriter OUTPUT = new StreamWriter(@"C:\Users\Cyberadmin\Desktop\\CHANGELOG.txt", true);
-            OUTPUT.WriteLine("File deleted: {0}", e.Name);
+            OUTPUT.WriteLine("File deleted: {0}", e.Name + " " + DateTime.Now.ToString());
             OUTPUT.Close();
 
         }
-
-
-
 
 
         protected override void OnStart(string[] args)
@@ -83,7 +92,7 @@ namespace WindowsServiceProject9_12
             StreamWriter OUTPUT = new StreamWriter(@"C:\Users\Cyberadmin\Desktop\\CHANGELOG.txt", true);
             OUTPUT.WriteLine("Program Started:  " + DateTime.Now.ToString());
             OUTPUT.Close();
-           // watch(@"C:\Users\Cyberadmin\Desktop");
+           
         }
 
         protected override void OnStop()
@@ -100,21 +109,25 @@ namespace WindowsServiceProject9_12
         private void servTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             //do thing every time the timer goes off
-            watch(@"C:\Users\Cyberadmin\Desktop");
             
-        }
+            //StreamWriter OUTPUT = new StreamWriter(@"C:\Users\Cyberadmin\Desktop\\CHANGELOG.txt", true);
+            //OUTPUT.WriteLine("Program Timer Enabled  " + DateTime.Now.ToString());
+            //OUTPUT.Close();
+            watch(@"C:\Users\Cyberadmin\Desktop");
 
+
+        }
 
 
         internal void TestStartandStop(string[] args)
         {
             // If started from Visual studio, run through the events.
             this.OnStart(args);
-            
-            //gotta run timer to test if everything works
-            
-            
-              
+
+            while (servTimer.Enabled)
+            {
+                //help
+            }          
 
             this.OnStop();
         }
