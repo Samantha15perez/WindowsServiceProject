@@ -10,6 +10,18 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
 
+//NOTE:
+//this project is not finished. I am aware that my grade will reflect this. 
+// but this is all the progress that I could complete between my scheduled work hours
+
+//i have a fileobject class, and other inherited classes, though they arent used yet.
+
+//it correctly monitors the desktop and raises flags for deletion, creation, and renaming correctly
+//however after adding the filepaths to the queue, it doesn't actually do anything with the files yet. 
+
+//i do not have a seperate file for the user to put in the directories to monitor, theyre currently held in variables
+
+
 
 //TO DO:
 //set paths to external file
