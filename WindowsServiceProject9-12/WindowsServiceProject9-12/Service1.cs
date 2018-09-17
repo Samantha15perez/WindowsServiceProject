@@ -11,23 +11,36 @@ using System.IO;
 using System.Collections;
 
 
+//TO DO:
+//set paths to external file
+// grab items from queue and copy them to directory
+//set up said directory
+//check if items in queue exist
+//physically copy over the files through the queue
+
+
+
+
 namespace WindowsServiceProject9_12
 {
     public partial class Service1 : ServiceBase
     {
-        
+        Queue<string> qt = new Queue<string>();
 
         public Service1()
         {
             InitializeComponent();
         }
 
-        public string path = @"C:\Users\Cyberadmin\Desktop"; //put path here
+        //put this in easily accessible external file later
 
-        //Queue qt = new Queue();
-        
-        
-        
+        public string path = @"C:\Users\Public\Pictures\Sample Pictures"; //put path here
+        public string  changelogpath = @"C:\Users\Public\Pictures"; //put path here
+        public string backuppath = "put here";
+
+
+
+
 
 
 
@@ -35,7 +48,7 @@ namespace WindowsServiceProject9_12
         private void watch(string path)
         {
 
-
+            
 
             FileSystemWatcher fileSystemWatcher = new FileSystemWatcher();
 
@@ -54,45 +67,53 @@ namespace WindowsServiceProject9_12
 
         }
 
-        private static void FileSystemWatcher_Created(object sender, FileSystemEventArgs e)
+        private void FileSystemWatcher_Created(object sender, FileSystemEventArgs e)
 
         {
-            StreamWriter OUTPUT = new StreamWriter(@"C:\Users\Cyberadmin\Desktop\\CHANGELOG.txt", true);
+            StreamWriter OUTPUT = new StreamWriter(changelogpath, true);
             OUTPUT.WriteLine("File created: {0}", e.Name + " " + DateTime.Now.ToString());
             OUTPUT.Close();
 
 
+            qt.Enqueue(e.FullPath);
+
+
+
+
         }
 
-        private static void FileSystemWatcher_Renamed(object sender, FileSystemEventArgs e)
+        private void FileSystemWatcher_Renamed(object sender, FileSystemEventArgs e)
 
         {
 
-            StreamWriter OUTPUT = new StreamWriter(@"C:\Users\Cyberadmin\Desktop\\CHANGELOG.txt", true);
+            StreamWriter OUTPUT = new StreamWriter(changelogpath, true);
             OUTPUT.WriteLine("File renamed: {0}", e.Name + " " + DateTime.Now.ToString());
             OUTPUT.Close();
-            
+
+            qt.Enqueue(e.FullPath);
 
         }
 
-        private static void FileSystemWatcher_Deleted(object sender, FileSystemEventArgs e)
+        private void FileSystemWatcher_Deleted(object sender, FileSystemEventArgs e)
 
         {
 
-            StreamWriter OUTPUT = new StreamWriter(@"C:\Users\Cyberadmin\Desktop\\CHANGELOG.txt", true);
+            StreamWriter OUTPUT = new StreamWriter(changelogpath, true);
             OUTPUT.WriteLine("File deleted: {0}", e.Name + " " + DateTime.Now.ToString());
             OUTPUT.Close();
 
+            qt.Enqueue(e.FullPath); 
         }
 
 
         protected override void OnStart(string[] args)
         {
             //do thing on start
-            StreamWriter OUTPUT = new StreamWriter(@"C:\Users\Cyberadmin\Desktop\\CHANGELOG.txt", true);
+            StreamWriter OUTPUT = new StreamWriter(changelogpath, true);
             OUTPUT.WriteLine("Program Started:  " + DateTime.Now.ToString());
             OUTPUT.Close();
-           
+
+            
         }
 
         protected override void OnStop()
@@ -100,8 +121,14 @@ namespace WindowsServiceProject9_12
             //do thing before stop
             //should probably output to log
 
-            StreamWriter OUTPUT = new StreamWriter(@"C:\Users\Cyberadmin\Desktop\\CHANGELOG.txt", true);
+            StreamWriter OUTPUT = new StreamWriter(changelogpath, true);
             OUTPUT.WriteLine("Program Ended:  " + DateTime.Now.ToString());
+            
+            foreach (string value in qt)
+            {
+                OUTPUT.WriteLine(value);
+            }
+
             OUTPUT.Close();
 
         }
@@ -113,7 +140,9 @@ namespace WindowsServiceProject9_12
             //StreamWriter OUTPUT = new StreamWriter(@"C:\Users\Cyberadmin\Desktop\\CHANGELOG.txt", true);
             //OUTPUT.WriteLine("Program Timer Enabled  " + DateTime.Now.ToString());
             //OUTPUT.Close();
-            watch(@"C:\Users\Cyberadmin\Desktop");
+            watch(path);
+
+            //copy files to directory after timer ends
 
 
         }
