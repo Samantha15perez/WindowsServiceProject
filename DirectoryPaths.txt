@@ -1,0 +1,8 @@
+Choose the locations you would like to back up on 
+this machine. Please make sure to put the paths in 
+single quotes.
+
+
+DIRECTORY- "C:\Users\Cyberadmin\Desktop"
+
+BACKUP- "C:\Users\Cyberadmin\Desktop\TestBackup"
